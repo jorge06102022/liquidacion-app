@@ -69,12 +69,10 @@ def index(request):
 
 # 🔥 ESTO DÉJALO FUERA (CORRECTO)
 def privacidad(request):
-    return render(request, 'privacidad.html')
-
+    return render(request, 'calculadora/privacidad.html')
 
 def terminos(request):
-    return render(request, 'terminos.html')
-
+    return render(request, 'calculadora/terminos.html')
 
 def contacto(request):
-    return render(request, 'contacto.html')
+    return render(request, 'calculadora/contacto.html')
