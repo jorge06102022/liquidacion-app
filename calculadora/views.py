@@ -3,6 +3,7 @@ from datetime import datetime
 from .utils import calcular_liquidacion
 
 
+
 def formato_moneda(valor):
     return "${:,.2f}".format(valor).replace(",", "X").replace(".", ",").replace("X", ".")
 
@@ -76,3 +77,108 @@ def terminos(request):
 
 def contacto(request):
     return render(request, 'calculadora/contacto.html')
+
+def calcular_prima(request):
+    resultado = None
+    error = None
+
+    if request.method == "POST":
+        try:
+            salario = float(request.POST.get("salario"))
+            ingreso = request.POST.get("ingreso")
+            retiro = request.POST.get("retiro")
+
+            from datetime import datetime
+            ingreso = datetime.strptime(ingreso, "%Y-%m-%d")
+            retiro = datetime.strptime(retiro, "%Y-%m-%d")
+
+            dias = (retiro - ingreso).days
+
+            if dias <= 0:
+                error = "Fechas inválidas"
+            else:
+                prima = (salario * dias) / 360
+
+                def formato(valor):
+                    return "${:,.2f}".format(valor).replace(",", "X").replace(".", ",").replace("X", ".")
+
+                resultado = formato(prima)
+
+        except:
+            error = "Error en los datos"
+
+    return render(request, "calculadora/prima.html", {
+        "resultado": resultado,
+        "error": error
+    })
+def home(request):
+    return render(request, "calculadora/home.html")
+
+def calcular_cesantias(request):
+    resultado = None
+    error = None
+
+    if request.method == "POST":
+        try:
+            salario = float(request.POST.get("salario"))
+            ingreso = request.POST.get("ingreso")
+            retiro = request.POST.get("retiro")
+
+            from datetime import datetime
+            ingreso = datetime.strptime(ingreso, "%Y-%m-%d")
+            retiro = datetime.strptime(retiro, "%Y-%m-%d")
+
+            dias = (retiro - ingreso).days
+
+            if dias <= 0:
+                error = "Fechas inválidas"
+            else:
+                cesantias = (salario * dias) / 360
+
+                def formato(valor):
+                    return "${:,.2f}".format(valor).replace(",", "X").replace(".", ",").replace("X", ".")
+
+                resultado = formato(cesantias)
+
+        except:
+            error = "Error en los datos"
+
+    return render(request, "calculadora/cesantias.html", {
+        "resultado": resultado,
+        "error": error
+    })
+
+
+def calcular_vacaciones(request):
+    resultado = None
+    error = None
+
+    if request.method == "POST":
+        try:
+            salario = float(request.POST.get("salario"))
+            ingreso = request.POST.get("ingreso")
+            retiro = request.POST.get("retiro")
+
+            from datetime import datetime
+            ingreso = datetime.strptime(ingreso, "%Y-%m-%d")
+            retiro = datetime.strptime(retiro, "%Y-%m-%d")
+
+            dias = (retiro - ingreso).days
+
+            if dias <= 0:
+                error = "Fechas inválidas"
+            else:
+                vacaciones = (salario * dias) / 720
+
+                def formato(valor):
+                    return "${:,.2f}".format(valor).replace(",", "X").replace(".", ",").replace("X", ".")
+
+                resultado = formato(vacaciones)
+
+        except:
+            error = "Error en los datos"
+
+    return render(request, "calculadora/vacaciones.html", {
+        "resultado": resultado,
+        "error": error
+    })

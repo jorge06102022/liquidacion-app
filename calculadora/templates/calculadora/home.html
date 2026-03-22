@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadoras Laborales Colombia | Jordan Labs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --bg-dark: #020617;
+            --card-bg: rgba(15, 23, 42, 0.6);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            /* Fondo con orbes de luz sutiles */
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(0, 242, 254, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(79, 172, 254, 0.05) 0%, transparent 40%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 60px 24px;
+            width: 100%;
+        }
+
+        /* HEADER SECTION */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            border-radius: 100px;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            background: linear-gradient(to bottom, #fff 50%, #64748b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 20px auto 0;
+            line-height: 1.6;
+        }
+
+        /* GRID SYSTEM */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        /* TARJETAS ELITE */
+        .card {
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 40px 30px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Efecto de luz interna al pasar el mouse */
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 242, 254, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
+                        0 0 20px rgba(0, 242, 254, 0.05);
+        }
+
+        /* Decoración de la tarjeta */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(0, 242, 254, 0.05), transparent);
+            pointer-events: none;
+        }
+
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .card:hover .icon-box {
+            background: var(--primary);
+            color: #000;
+            transform: rotate(-5deg) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card:hover .btn {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: #020617;
+            border-color: transparent;
+            box-shadow: 0 8px 15px rgba(0, 242, 254, 0.2);
+        }
+
+        /* FOOTER MODERN */
+        footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .legal-text {
+            color: #475569;
+            font-size: 11px;
+            max-width: 500px;
+            margin: 20px auto;
+            line-height: 1.6;
+        }
+
+        .brand {
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 1px;
+            font-size: 13px;
+        }
+
+        /* ANIMACIONES */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 600px) {
+            .container { padding: 40px 20px; }
+            h1 { font-size: 2rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <header>
+        
+        <h1>Calculadoras Laborales</h1>
+        <div class="subtitle">La herramienta definitiva para el trabajador colombiano. Resultados precisos, transparentes y en tiempo real.</div>
+    </header>
+
+    <div class="grid">
+        <div class="card">
+            <div class="icon-box">💼</div>
+            <div class="title">Liquidación</div>
+            <div class="desc">Calcula el saldo total de tu contrato incluyendo todas las prestaciones legales.</div>
+            <a href="/index/" class="btn">Abrir Herramienta</a>
+        </div>
+
+        <div class="card">
+            <div class="icon-box">🎁</div>
+            <div class="title">Prima Legal</div>
+            <div class="desc">Obtén el valor de tu prima de servicios para los periodos de junio y diciembre.</div>
+            <a href="/prima/" class="btn">Calcular Ahora</a>
+        </div>
+
+        <div class="card">
+            <div class="icon-box">📈</div>
+            <div class="title">Cesantías</div>
+            <div class="desc">Proyecta tus cesantías e intereses acumulados para retiro o ahorro.</div>
+            <a href="/cesantias/" class="btn">Ver Proyección</a>
+        </div>
+
+        <div class="card">
+            <div class="icon-box">🌴</div>
+            <div class="title">Vacaciones</div>
+            <div class="desc">Calcula el pago de tus días de descanso proporcional al tiempo laborado.</div>
+            <a href="/vacaciones/" class="btn">Gestionar</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/privacidad/">Privacidad</a>
+            <a href="/terminos/">Términos</a>
+            <a href="/contacto/">Soporte</a>
+        </div>
+        
+        <p class="brand">JORDAN LABS • DIGITAL FINANCE EXPERIENCE</p>
+        
+        <p class="legal-text">
+            © 2026 Todos los derechos reservados. Esta herramienta es de carácter informativo y referencial. Se recomienda validar los resultados con un profesional contable o jurídico.
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>
