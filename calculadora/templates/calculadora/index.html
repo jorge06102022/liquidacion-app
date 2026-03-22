@@ -3,80 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Liquidación Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Liquidación AI | Gold Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --accent: #00ffcc;
-            --bg-dark: #080e12;
-            --glass: rgba(255, 255, 255, 0.07);
-            --glass-border: rgba(255, 255, 255, 0.12);
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #22d3ee;
+            --success: #10b981;
+            --bg: #030712;
+            --card-bg: rgba(17, 24, 39, 0.7);
         }
 
         * {
             box-sizing: border-box;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
             margin: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: radial-gradient(circle at top left, #16222a, #000000);
-            color: white;
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+            color: #f8fafc;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Fondo animado sutil */
-        body::before {
-            content: "";
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: var(--secondary);
-            filter: blur(150px);
+        /* Efecto de partículas flotantes */
+        .bg-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            filter: blur(120px);
             border-radius: 50%;
             z-index: -1;
-            top: 10%;
-            left: 10%;
-            animation: drift 10s infinite alternate;
+            opacity: 0.2;
+            animation: float 15s infinite alternate;
         }
 
-        @keyframes drift {
-            from { transform: translate(0,0); }
-            to { transform: translate(100px, 50px); }
+        @keyframes float {
+            0% { transform: translate(-20%, -20%); }
+            100% { transform: translate(40%, 40%); }
         }
 
         .container {
-            width: 90%;
-            max-width: 450px;
-            background: var(--glass);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            border-radius: 28px;
-            padding: 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            width: 92%;
+            max-width: 500px;
+            background: var(--card-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 35px;
+            padding: 45px;
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+            margin: 20px;
         }
 
         h1 {
             text-align: center;
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            background: linear-gradient(to right, #fff, #888);
+            font-size: 34px;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -1.5px;
+            background: linear-gradient(to bottom right, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -85,274 +83,256 @@
             text-align: center;
             font-size: 14px;
             color: #94a3b8;
-            margin-bottom: 30px;
-            letter-spacing: 0.5px;
+            margin-bottom: 35px;
+            font-weight: 400;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         label {
             display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #cbd5e1;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             margin-bottom: 8px;
-            margin-left: 5px;
+            margin-left: 4px;
         }
 
         input {
             width: 100%;
-            padding: 14px 18px;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--glass-border);
-            border-radius: 14px;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 18px;
             color: white;
-            font-size: 15px;
+            font-size: 16px;
             outline: none;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
         }
 
         input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
         }
 
-        small {
-            display: block;
-            margin-top: 8px;
-            color: #64748b;
-            font-size: 11px;
-        }
-
-        button {
+        .btn-calc {
             width: 100%;
-            padding: 16px;
-            margin-top: 10px;
+            padding: 18px;
             border: none;
-            border-radius: 16px;
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
-            color: #000;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px rgba(79, 172, 254, 0.4);
+        .btn-calc:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 35px -5px rgba(99, 102, 241, 0.5);
             filter: brightness(1.1);
         }
 
-        button:active {
-            transform: translateY(0);
+        /* RESULTADOS MODERNOS */
+        .result-box {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            animation: slideUp 0.6s ease-out;
         }
 
-        .error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: #fca5a5;
-            padding: 12px;
-            border-radius: 12px;
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .result {
-            margin-top: 30px;
+        .res-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .res-item {
             background: rgba(255, 255, 255, 0.03);
+            padding: 18px;
             border-radius: 20px;
-            padding: 20px;
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .result h2 {
-            font-size: 18px;
-            text-align: center;
-            margin-top: 0;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .result-item:last-child {
-            border-bottom: none;
-        }
-
-        .label-with-icon {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
+        .res-item .label {
+            font-size: 10px;
             color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: block;
         }
 
-        .value {
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: 600;
-            color: #f8fafc;
+        .res-item .amount {
+            font-size: 17px;
+            font-weight: 700;
+            color: #fff;
         }
 
-        .total {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px dashed var(--glass-border) !important;
+        .total-banner {
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(99, 102, 241, 0.1));
+            border: 1px solid var(--accent);
+            padding: 25px;
+            border-radius: 24px;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        .total .value {
-            font-size: 22px;
+        .total-banner .amount {
+            display: block;
+            font-size: 32px;
+            font-weight: 800;
             color: var(--accent);
-            text-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+            text-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
         }
 
-        /* Estilo para el input de fecha (calendario) */
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: invert(1);
-            cursor: pointer;
+        .btn-wa {
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            border-radius: 18px;
+            font-weight: 700;
+            gap: 10px;
+            font-size: 15px;
         }
 
-        @media(max-width: 480px){
-            .container { padding: 25px; }
-            h1 { font-size: 22px; }
+        .btn-wa:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        footer a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 12px;
+            margin: 0 10px;
+        }
+
+        footer a:hover { color: var(--primary); }
+
+        @media (max-width: 480px) {
+            .container { padding: 30px 20px; }
+            .res-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>Liquidación Laboral</h1>
-    <div class="subtitle">Calcula cuánto te deben en segundos ⚡</div>
+    <div class="bg-glow"></div>
 
-    <form method="POST">
-        {% csrf_token %}
+    <div class="container">
+        <h1>Liquidación Pro</h1>
+        <p class="subtitle">Algoritmo financiero de precisión ⚡</p>
 
-        <div class="form-group">
-            <label>Salario base mensual</label>
-            <input type="number" name="salario" placeholder="Ej: 1300000" required>
-            <small>Sin puntos ni caracteres especiales</small>
-        </div>
+        <form method="POST">
+            {% csrf_token %}
 
-        <div class="form-group">
-            <label>Fecha de inicio</label>
-            <input type="date" name="ingreso" required>
-        </div>
+            <div class="form-group">
+                <label>Salario Base Mensual</label>
+                <input type="number" name="salario" placeholder="Ej: 1300000" required>
+            </div>
 
-        <div class="form-group">
-            <label>Fecha de terminación</label>
-            <input type="date" name="retiro" required>
-        </div>
+            <div style="display: flex; gap: 15px;">
+                <div class="form-group" style="flex:1">
+                    <label>Fecha Ingreso</label>
+                    <input type="date" name="ingreso" required>
+                </div>
+                <div class="form-group" style="flex:1">
+                    <label>Fecha Retiro</label>
+                    <input type="date" name="retiro" required>
+                </div>
+            </div>
 
-        <button type="submit">CALCULAR MI LIQUIDACIÓN 💰</button>
+            <button type="submit" class="btn-calc">
+                EFECTUAR CÁLCULO
+            </button>
+        </form>
+
         {% if resultado %}
-<a id="whatsappBtn" target="_blank" style="
-display:block;
-margin-top:15px;
-text-align:center;
-padding:14px;
-border-radius:14px;
-background:#25D366;
-color:white;
-font-weight:bold;
-text-decoration:none;
-">
-📲 Compartir por WhatsApp
-</a>
-{% endif %}
-    </form>
+        <div class="result-box">
+            <div class="total-banner">
+                <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #94a3b8;">Total a recibir</span>
+                <span class="amount" id="total-val">{{ resultado.total }}</span>
+            </div>
 
-    {% if error %}
-    <div class="error">
-        {{ error }}
+            <div class="res-grid">
+                <div class="res-item">
+                    <span class="label">Cesantías</span>
+                    <span class="amount">{{ resultado.cesantias }}</span>
+                </div>
+                <div class="res-item">
+                    <span class="label">Intereses</span>
+                    <span class="amount">{{ resultado.intereses }}</span>
+                </div>
+                <div class="res-item">
+                    <span class="label">Prima Serv.</span>
+                    <span class="amount">{{ resultado.prima }}</span>
+                </div>
+                <div class="res-item">
+                    <span class="label">Vacaciones</span>
+                    <span class="amount">{{ resultado.vacaciones }}</span>
+                </div>
+            </div>
+
+            <a id="whatsappBtn" class="btn-wa" href="#">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326z"/>
+                </svg>
+                Compartir por WhatsApp
+            </a>
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 
-    {% if resultado %}
-    <div class="result">
-        <h2>💸 Esto es lo que te deben</h2>
-        
-        <div class="result-item">
-            <div class="label-with-icon">💰 Cesantías</div>
-            <div class="value">{{ resultado.cesantias }}</div>
-        </div>
+    <footer>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/terminos/">Términos</a>
+        <a href="/contacto/">Contacto</a>
+        <p style="color:#475569; font-size: 11px; margin-top: 15px;">© 2026 Jordan Labs - Digital Finance Experience</p>
+    </footer>
 
-        <div class="result-item">
-            <div class="label-with-icon">📈 Intereses</div>
-            <div class="value">{{ resultado.intereses }}</div>
-        </div>
-
-        <div class="result-item">
-            <div class="label-with-icon">🎁 Prima</div>
-            <div class="value">{{ resultado.prima }}</div>
-        </div>
-
-        <div class="result-item">
-            <div class="label-with-icon">🌴 Vacaciones</div>
-            <div class="value">{{ resultado.vacaciones }}</div>
-        </div>
-
-        <div class="result-item total">
-            <div class="label-with-icon" style="color: white; font-weight: bold;">TOTAL A RECIBIR</div>
-            <div class="value">{{ resultado.total }}</div>
-        </div>
-        <div style="margin-top:20px; text-align:center;">
-  <p style="color:#94a3b8; font-size:13px;">
-    ⚡ Comparte este cálculo con tus amigos
-  </p>
-</div>
-    </div>
-    {% endif %}
-
-</div>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-
-    const btn = document.getElementById("whatsappBtn");
-
-    if (btn) {
-        try {
-            const mensaje = `💰 Calculé mi liquidación:
-
-Cesantías: {{ resultado.cesantias|default_if_none:"" }}
-Intereses: {{ resultado.intereses|default_if_none:"" }}
-Prima: {{ resultado.prima|default_if_none:"" }}
-Vacaciones: {{ resultado.vacaciones|default_if_none:"" }}
-
-💸 Total: {{ resultado.total|default_if_none:"" }}
-
-Haz tu cálculo aquí 👇
-https://liquidacion-app.onrender.com`;
-
-            const url = "https://wa.me/?text=" + encodeURIComponent(mensaje);
-            btn.href = url;
-        } catch (e) {
-            console.log("No hay resultado aún");
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const btn = document.getElementById("whatsappBtn");
+        if (btn) {
+            const mensaje = `*LIQUIDACIÓN CALCULADA* 📊\n\n` +
+                            `• *Cesantías:* {{ resultado.cesantias|default:"" }}\n` +
+                            `• *Intereses:* {{ resultado.intereses|default:"" }}\n` +
+                            `• *Prima:* {{ resultado.prima|default:"" }}\n` +
+                            `• *Vacaciones:* {{ resultado.vacaciones|default:"" }}\n\n` +
+                            `💰 *TOTAL: {{ resultado.total|default:"" }}*\n\n` +
+                            `Calcula la tuya aquí: https://liquidacion-app.onrender.com`;
+            btn.href = "https://wa.me/?text=" + encodeURIComponent(mensaje);
         }
-    }
-
-});
-</script>
+    });
+    </script>
 </body>
-<footer style="
-text-align:center;
-margin-top:40px;
-color:#94a3b8;
-font-size:13px;
-padding-bottom:20px;
-">
-  <a href="/privacidad/" style="color:#00d4ff;">Privacidad</a> |
-  <a href="/terminos/" style="color:#00d4ff;">Términos</a> |
-  <a href="/contacto/" style="color:#00d4ff;">Contacto</a>
-</footer>
 </html>
