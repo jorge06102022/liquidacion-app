@@ -81,3 +81,14 @@ def index(request):
         "resultado": resultado,
         "error": error
     })
+
+    from django.shortcuts import render
+
+def privacidad(request):
+    return render(request, 'privacidad.html')
+
+def terminos(request):
+    return render(request, 'terminos.html')
+
+def contacto(request):
+    return render(request, 'contacto.html')

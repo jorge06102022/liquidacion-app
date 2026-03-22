@@ -280,7 +280,7 @@ text-decoration:none;
 
     {% if resultado %}
     <div class="result">
-        <h2><h2>💸 Esto es lo que te deben</h2></h2>
+        <h2>💸 Esto es lo que te deben</h2>
         
         <div class="result-item">
             <div class="label-with-icon">💰 Cesantías</div>
@@ -306,6 +306,11 @@ text-decoration:none;
             <div class="label-with-icon" style="color: white; font-weight: bold;">TOTAL A RECIBIR</div>
             <div class="value">{{ resultado.total }}</div>
         </div>
+        <div style="margin-top:20px; text-align:center;">
+  <p style="color:#94a3b8; font-size:13px;">
+    ⚡ Comparte este cálculo con tus amigos
+  </p>
+</div>
     </div>
     {% endif %}
 
@@ -326,7 +331,7 @@ Vacaciones: {{ resultado.vacaciones|default:"" }}
 💸 Total: {{ resultado.total|default:"" }}
 
 Haz tu cálculo aquí 👇
-https://tusitio.com`;
+https://liquidacion-app.onrender.com`;
 
         const url = "https://wa.me/?text=" + encodeURIComponent(mensaje);
         btn.href = url;
@@ -335,4 +340,15 @@ https://tusitio.com`;
 });
 </script>
 </body>
+<footer style="
+text-align:center;
+margin-top:40px;
+color:#94a3b8;
+font-size:13px;
+padding-bottom:20px;
+">
+  <a href="/privacidad/" style="color:#00d4ff;">Privacidad</a> |
+  <a href="/terminos/" style="color:#00d4ff;">Términos</a> |
+  <a href="/contacto/" style="color:#00d4ff;">Contacto</a>
+</footer>
 </html>
