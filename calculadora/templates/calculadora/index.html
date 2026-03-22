@@ -320,24 +320,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const btn = document.getElementById("whatsappBtn");
 
-    {% if resultado %}
     if (btn) {
-        const mensaje = `💰 Calculé mi liquidación:
+        try {
+            const mensaje = `💰 Calculé mi liquidación:
 
-Cesantías: {{ resultado.cesantias }}
-Intereses: {{ resultado.intereses }}
-Prima: {{ resultado.prima }}
-Vacaciones: {{ resultado.vacaciones }}
+Cesantías: {{ resultado.cesantias|default_if_none:"" }}
+Intereses: {{ resultado.intereses|default_if_none:"" }}
+Prima: {{ resultado.prima|default_if_none:"" }}
+Vacaciones: {{ resultado.vacaciones|default_if_none:"" }}
 
-💸 Total: {{ resultado.total }}
+💸 Total: {{ resultado.total|default_if_none:"" }}
 
 Haz tu cálculo aquí 👇
 https://liquidacion-app.onrender.com`;
 
-        const url = "https://wa.me/?text=" + encodeURIComponent(mensaje);
-        btn.href = url;
+            const url = "https://wa.me/?text=" + encodeURIComponent(mensaje);
+            btn.href = url;
+        } catch (e) {
+            console.log("No hay resultado aún");
+        }
     }
-    {% endif %}
 
 });
 </script>
