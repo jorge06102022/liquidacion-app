@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, privacidad, terminos, contacto, calcular_prima, home, calcular_cesantias, calcular_vacaciones, sueldo_neto, horas_extra, liquidacion_renuncia, indemnizacion, dias_trabajados
+from .views import index, privacidad, terminos, contacto, calcular_prima, home, calcular_cesantias, calcular_vacaciones,sueldo_neto, horas_extra, liquidacion_renuncia, indemnizacion, dias_trabajados
 
 urlpatterns = [
     path('index/', index, name='index'),
