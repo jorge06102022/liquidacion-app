@@ -182,3 +182,93 @@ def calcular_vacaciones(request):
         "resultado": resultado,
         "error": error
     })
+
+    from django.shortcuts import render
+from datetime import datetime
+
+def formato(valor):
+    return "${:,.2f}".format(valor).replace(",", "X").replace(".", ",").replace("X", ".")
+
+# 💰 SUELDO NETO
+def sueldo_neto(request):
+    resultado = None
+
+    if request.method == "POST":
+        salario = float(request.POST.get("salario"))
+
+        salud = salario * 0.04
+        pension = salario * 0.04
+        neto = salario - salud - pension
+
+        resultado = {
+            "salud": formato(salud),
+            "pension": formato(pension),
+            "neto": formato(neto)
+        }
+
+    return render(request, "calculadora/sueldo.html", {"resultado": resultado})
+
+
+# ⏰ HORAS EXTRA
+def horas_extra(request):
+    resultado = None
+
+    if request.method == "POST":
+        salario = float(request.POST.get("salario"))
+        horas = float(request.POST.get("horas"))
+
+        valor_hora = salario / 240
+        extra = valor_hora * horas * 1.25
+
+        resultado = formato(extra)
+
+    return render(request, "calculadora/horas.html", {"resultado": resultado})
+
+
+# 📊 INDEMNIZACIÓN
+def indemnizacion(request):
+    resultado = None
+
+    if request.method == "POST":
+        salario = float(request.POST.get("salario"))
+        dias = int(request.POST.get("dias"))
+
+        indemnizacion = (salario / 30) * dias
+
+        resultado = formato(indemnizacion)
+
+    return render(request, "calculadora/indemnizacion.html", {"resultado": resultado})
+
+
+# 🧾 RENUNCIA
+def liquidacion_renuncia(request):
+    resultado = None
+
+    if request.method == "POST":
+        salario = float(request.POST.get("salario"))
+        dias = int(request.POST.get("dias"))
+
+        prima = (salario * dias) / 360
+        cesantias = (salario * dias) / 360
+        vacaciones = (salario * dias) / 720
+
+        total = prima + cesantias + vacaciones
+
+        resultado = formato(total)
+
+    return render(request, "calculadora/renuncia.html", {"resultado": resultado})
+
+
+# 📅 DÍAS TRABAJADOS
+def dias_trabajados(request):
+    resultado = None
+
+    if request.method == "POST":
+        ingreso = datetime.strptime(request.POST.get("ingreso"), "%Y-%m-%d")
+        retiro = datetime.strptime(request.POST.get("retiro"), "%Y-%m-%d")
+
+        dias = (retiro - ingreso).days
+
+        resultado = dias
+
+    return render(request, "calculadora/dias.html", {"resultado": resultado})
