@@ -183,7 +183,6 @@ def calcular_vacaciones(request):
         "error": error
     })
 
-    from django.shortcuts import render
 from datetime import datetime
 
 def formato(valor):
